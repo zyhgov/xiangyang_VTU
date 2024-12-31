@@ -1,0 +1,263 @@
+@import './open-props.min.css' layer(design.system);
+@import './normalize.light.min.css'
+layer(base.normalize);
+
+@import url('./css2.css');
+
+@font-face {
+	font-family: 'PingFang'; /* 你可以自定义这个名字 */
+	src: url('../../health/PingFang.ttf') format('truetype'); /* 更改 './fonts/myfont.ttf' 为你的字体文件实际路径 */
+	font-weight: normal;
+	font-style: normal;
+  }
+
+
+@layer base.normalize-overrides {
+    :root {
+        font-family: 'PingFang', sans-serif;
+
+        --surface-1: white;
+        --surface-2: hsl(240, 11%, 96%);
+        --text-1: hsl(240, 3%, 12%);
+        --text-2: hsl(240, 2%, 44%);
+        --radios-custom: 14px;
+        --font-size-head-custom: 1.125rem;
+    }
+
+    body {
+        font-family: 'PingFang';
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==== TYPOGRAPHY ==== */
+
+    /* h1 set to "text-wrap: balance" out of the box by Open Props normalize; :) */
+
+    h1 {
+        font-size: var(--font-size-4);
+    }
+
+    h2 {
+        text-align: center;
+        font-size: var(--font-size-4);
+    }
+
+    :is(h3, h4) {
+        font-size: var(--font-size-head-custom);
+    }
+
+    :is(h2, h3, h4) {
+        text-wrap: pretty;
+    }
+
+    :is(h1, h2, h3, h4) {
+        font-weight: var(--font-weight-7);
+    }
+
+
+
+
+
+    small {
+        font-weight: var(--font-weight-6);
+        color: var(--text-2);
+    }
+
+    /* --lg-n-only */
+    @media (768px <=width <=1024px) {
+        :is(h1, h2) {
+            font-size: calc(var(--font-size-3) + var(--font-size-00));
+        }
+    }
+
+    /* --lg-n-above */
+    @media (width > 1024px) {
+        h1 {
+            font-size: var(--font-size-6);
+        }
+
+        h2 {
+            font-size: var(--font-size-5);
+        }
+
+        h3 {
+            font-size: var(--font-size-4);
+        }
+    }
+}
+
+@layer base.app {
+    body {
+        background-color: var(--surface-2);
+        padding-block: var(--size-fluid-5);
+        padding-inline: var(--size-5);
+    }
+
+    .bento-section {
+        display: grid;
+        place-items: center;
+
+        header {
+            padding-block: var(--size-3);
+        }
+    }
+
+    .container {
+        max-inline-size: 366px;
+
+        /* --lg-only */
+        @media (768px <=width <=1024px) {
+            max-inline-size: 695px;
+        }
+
+        /* --lg-n-above */
+        @media (width >=1024px) {
+            max-inline-size: 975px;
+        }
+    }
+}
+
+@layer base.components {
+    .bento-grid {
+        --columns: 1;
+        --card-min-block-size: 360px;
+        display: grid;
+        gap: calc(var(--size-7) + var(--size-1));
+
+        grid-template-columns: repeat(var(--columns), 1fr);
+
+        /* --lg-only */
+        @media (768px <=width <=1024px) {
+            --columns: 2;
+        }
+
+        /* --lg-n-above */
+        @media (width >=1024px) {
+            --columns: 12;
+        }
+    }
+
+    .card {
+        display: grid;
+        place-items: center;
+        gap: var(--size-2);
+
+        margin: 0;
+        padding: 0;
+        color: var(--text-1);
+        text-decoration: none;
+
+        background-color: white;
+        border-radius: var(--radios-custom);
+        min-block-size: var(--card-min-block-size);
+        overflow: clip;
+
+        .content {
+            display: grid;
+            place-items: center start;
+            gap: var(--size-2);
+            block-size: 100%;
+            padding: var(--size-6);
+            grid-template-rows: auto 1fr auto;
+        }
+
+        &.hero {
+            grid-column: span var(--columns);
+        }
+
+        &:not(.hero) {
+            grid-template-rows: 1fr 1fr;
+
+            .visual {
+                container-type: size;
+                overflow: clip;
+                inline-size: 100%;
+                block-size: 100%;
+
+                img {
+                    block-size: 100cqb;
+                    background-color: white;
+                    object-fit: contain;
+                }
+            }
+
+            .content {
+                :is(h3, h4) {
+                    align-self: start;
+                }
+            }
+        }
+
+        /* --md-n-above  */
+        @media (width >=768px) {
+            &.hero {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* --lg-only */
+        @media (768px <=width <=1024px) {
+            &.hero {
+                min-block-size: calc(var(--card-min-block-size) * 1.125);
+            }
+        }
+
+        /* --lg-n-above */
+        @media (width >=1024px) {
+            grid-column: span calc(var(--columns) / 3);
+
+            &.hero {
+                grid-column: span var(--columns);
+                min-block-size: calc(var(--card-min-block-size) * 1.5);
+            }
+
+            &:nth-child(n + 2):nth-child(-n + 5) {
+                grid-column: span calc(var(--columns) / 2);
+                min-block-size: calc(var(--card-min-block-size) * 1.25);
+            }
+        }
+
+        /* --motionOK  */
+        @media (prefers-reduced-motion: no-preference) {
+            img {
+                opacity: 0;
+                transition: scale 0.4s ease;
+            }
+
+            &:hover img {
+                scale: 1.03;
+            }
+
+            &.hero img {
+                animation: 1s var(--animation-fade-in) forwards;
+            }
+        }
+    }
+}
+
+@layer animation.reveal {
+
+    /* --motionOK */
+    @media (prefers-reduced-motion: no-preference) {
+        .card:not(.hero) {
+            opacity: 0;
+            will-change: transform;
+        }
+
+        .reveal {
+            /* Animation: fade-in from Open Props */
+            animation: fade-in 660ms ease forwards,
+                slide-up 1000ms cubic-bezier(0, 0, 0.1, 1) forwards;
+
+            img {
+                animation: 1s var(--animation-fade-in) forwards;
+            }
+        }
+
+        @keyframes slide-up {
+            from {
+                transform: translateY(100px);
+            }
+        }
+    }
+}
