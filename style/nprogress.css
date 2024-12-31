@@ -1,0 +1,76 @@
+/* Make clicks pass-through */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: #F9F871;
+
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 5px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #F9F871, 0 0 5px #BEE877;
+  opacity: 1.0;
+
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+      -ms-transform: rotate(3deg) translate(0px, -4px);
+          transform: rotate(3deg) translate(0px, -4px);
+}
+
+/* Remove these to get rid of the spinner */
+#nprogress .spinner {
+  display: block;
+  position: fixed;
+  z-index: 1031;
+  right: 20px; /* 或其他适合你布局的值 */
+  top: 20px; /* 同上 */
+}
+
+#nprogress .spinner-icon {
+  width: 32px; /* 增大圆圈直径 */
+  height: 32px; /* 增大圆圈直径 */
+  border-width: 10px; /* 边框加粗，让圆圈看起来更饱满 */
+  box-sizing: border-box;
+
+  border: solid 2px transparent;
+  border-top-color: #F9F871;
+  border-left-color: #BEE877;
+  border-radius: 50%;
+
+  /* 调整动画速度，使其更平滑或更快 */
+  -webkit-animation: nprogress-spinner 600ms linear infinite; /* 可根据需要调整时间 */
+          animation: nprogress-spinner 600ms linear infinite;
+}
+
+.nprogress-custom-parent {
+  overflow: hidden;
+  position: relative;
+}
+
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+  position: absolute;
+}
+
+@-webkit-keyframes nprogress-spinner {
+  0%   { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes nprogress-spinner {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
