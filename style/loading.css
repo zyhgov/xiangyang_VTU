@@ -68,3 +68,89 @@
     opacity: 0.7;
   }
   
+/* ========================================== */
+
+
+/* From Uiverse.io by satyamchaudharydev */ 
+/* .loader {
+      display: block;
+      --height-of-loader: 4px;
+      --loader-color: #0071e2;
+      width: 200px;
+      height: var(--height-of-loader);
+      margin-top: 300px;
+      border-radius: 30px;
+      background-color: rgba(0,0,0,0.2);
+      position: relative;
+    }
+    
+    .loader::before {
+      content: "";
+      position: absolute;
+      background: var(--loader-color);
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      border-radius: 30px;
+      animation: moving 1s ease-in-out infinite;
+      ;
+    }
+    
+    @keyframes moving {
+      50% {
+        width: 100%;
+      }
+    
+      100% {
+        width: 0;
+        right: 0;
+        left: unset;
+      }
+    } */
+
+
+
+
+
+
+
+
+
+
+/* From Uiverse.io by NlghtM4re */ 
+.loader {
+      width: 250px;
+      height: 10px;
+      border-radius: 2px;
+      background-color: rgba(0, 0, 0, 0.2);
+      position: absolute;
+      margin-top: 150px;
+    }
+    
+    .loader::before {
+      content: "";
+      position: absolute;
+      background-color: rgb(9, 188, 9);
+      width: 0%;
+      height: 100%;
+      border-radius: 2px;
+      animation: load 3.5s ease-in-out infinite;
+      box-shadow: rgb(9, 188, 9) 0px 2px 29px 0px;
+    }
+    
+    .container {
+      display: flex;
+      justify-content: center;
+    }
+    
+    @keyframes load {
+      50% {
+        width: 100%;
+      }
+    
+      100% {
+        right: 0;
+        left: unset;
+      }
+    }
